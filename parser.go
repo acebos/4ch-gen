@@ -21,7 +21,7 @@ func BuildGenerals(board string, catalog Catalog) map[string]string {
 		for _, thread := range page.Threads {
 			if isGeneral, name := ParseSubject(thread.Sub); isGeneral {
 				name := strings.ToLower(name)
-				generals[name] = fmt.Sprintf("https://boards.4chan.org/%s/thread/%d", board, thread.No)
+				generals[name] = fmt.Sprintf("https://boards.4channel.org/%s/thread/%d", board, thread.No)
 			}
 		}
 	}
