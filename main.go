@@ -6,7 +6,7 @@ import (
 )
 
 var (
-	BOARDS = []string{"g", "fit", "biz"}
+	BOARDS = []string{"g", "fit", "biz", "vg", "vr", "ck", }
 )
 
 func main() {

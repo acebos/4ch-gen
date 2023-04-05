@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 
-	. "github.com/bingsoo420/4ch-general"
+	. "github.com/fluteds/4ch-gen"
 )
 
 func TestItParseValidSubjects(t *testing.T) {

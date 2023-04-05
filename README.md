@@ -1,11 +1,8 @@
-# 4chan General [![Go](https://github.com/bingsoo420/4ch-general/actions/workflows/go.yml/badge.svg)](https://github.com/bingsoo420/4ch-general/actions/workflows/go.yml)
+# 4chan General [![Go](https://github.com/fluteds/4ch-gen/actions/workflows/go.yml/badge.svg)](https://github.com/fluteds/4ch-gen/actions/workflows/go.yml)
 
-## What is this?
+Self-updating bot running on a 6 hourly CRON job to match board generals to it's correct thread location. Forked from [Bingosss420.](https://github.com/bingsoo420/4ch-general)
 
-The repo contains a self-updating bot running on a 6 hourly CRON job to build
-board general to it's correct thread location.
-
-Example payload
+Example
 
 ```json
 {
@@ -15,30 +12,30 @@ Example payload
 }
 ```
 
-The access patterns will always remain as `board.general`, currently the only
-boards being scraped are
+The access patterns will always remain as `board.general`, currently the only boards being scraped are:
 
 - fit
 - g
 - biz
+- ck
+- vg
+- vr
 
-Which can be modified in `main.go` file
+Which can be modified in `main.go` file.
 
-## How do I use?
+## Usage
 
-### As a source of truth
-
-As a bash script
+### As a bash script
 
 ```sh
-curl https://raw.githubusercontent.com/bingsoo420/4ch-general/master/output/mappings.json | jq .g.wdg
+curl https://raw.githubusercontent.com/fluteds/4ch-gen/master/output/mappings.json | jq .g.wdg
 ```
 
-As a simple JavaScript fetch request
+### As a simple JavaScript fetch request
 
 ```js
 fetch(
-  "https://raw.githubusercontent.com/bingsoo420/4ch-general/master/output/mappings.json"
+  "https://raw.githubusercontent.com/fluteds/4ch-gen/master/output/mappings.json"
 )
   .then((r) => r.json())
   .then((r) => {
@@ -48,14 +45,12 @@ fetch(
   });
 ```
 
-The source of truth will refresh every 6 hours. Files may be updated to be
-granular later as `output/g.json` or `output/fit.json` if the 6 hours interval
-was found to be too little for certain boards.
+The source will refresh every 6 hours. Files may be updated to be granular later as `output/g.json` or `output/fit.json` if the 6 hours interval was found to be too little for certain boards.
 
 ### As a program
 
 ```sh
-git clone https://github.com/bingsoo420/4ch-general
+git clone
 cd 4ch-general
 go run ./
 ```
@@ -64,20 +59,10 @@ See the output JSON file in `output/mappings.json`
 
 ### As a fork
 
-Set up a personal access token in GitHub by visiting
+- Set your repo's workflow settings to have read/write permissions. `Repo / Settings / Actions / General / Workflow Permissions / Read and Write Permissions`
 
-`Profile / Settings / Developer settings / Personal access tokens / Fine-grained tokens / generate new token`
+- Set up a fine grained personal access token in GitHub by visiting `Profile / Settings / Developer settings / Personal access tokens / Fine-grained tokens / Generate new token`
+  
+- Set the token's permission to read/write under `Contents`. Copy the access token output and put that into a secret called `PAT`. `Repo / Settings / Secrets and variables / Actions / New repository secret`
 
-Set the token's permission to have read/write to `Contents`
-
-Copy the output and put that into your forked repo settings
-
-`Repo / Settings / Secrets and variables / Actions / New repository secret`
-
-Add your access token with the name `PAT` and the value is your copied token.
-
-Add your email with the name `EMAIL` and the value is your GitHub account email.
-
-Set workflow permission to have read/write permissions
-
-`Repo / Settings / Actions / General / Workflow Permissions / Read and Write Permissions`
+- Add another secret with the name being `EMAIL` and the value being your GitHub account email address. This is to sign off commits.

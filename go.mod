@@ -1,3 +1,3 @@
-module github.com/bingsoo420/4ch-general
+module github.com/fluteds/4ch-gen
 
 go 1.18
