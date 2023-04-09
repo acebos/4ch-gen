@@ -22,6 +22,10 @@ func main() {
 		mappings[board] = generals
 	}
 
-	jsonPayload, _ := json.Marshal(mappings)
+	jsonPayload, err := json.MarshalIndent(mappings, "", "    ")
+	if err != nil {
+		panic(err)
+	}
+
 	os.WriteFile("output/mappings.json", jsonPayload, 0644)
 }
